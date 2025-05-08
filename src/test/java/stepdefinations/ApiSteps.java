@@ -19,7 +19,7 @@ public class ApiSteps {
     private String expectedLastName;
 
     private final SecretClient secretClient = new SecretClientBuilder()
-            .vaultUrl("https://<your-keyvault-name>.vault.azure.net/")
+            .vaultUrl("https://sample34.vault.azure.net/")
             .credential(new DefaultAzureCredentialBuilder().build())
             .buildClient();
 
