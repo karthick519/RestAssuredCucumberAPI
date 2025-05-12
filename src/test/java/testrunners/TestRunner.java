@@ -1,17 +1,6 @@
-package testrunners;
-
-import org.junit.runner.RunWith;
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
-
-@RunWith(Cucumber.class)
 @CucumberOptions(
-    features = "src/test/resources/features/Example.feature",
+    features = "src/test/resources/features",
     glue = {"stepdefinations"},
-    plugin = {"pretty", "html:target/cucumber-report/cucumber-reports.html", "json:target/cucumber-report/Cucumber.json","rerun:target/rerun.txt" },
+    plugin = {"pretty", "json:target/cucumber.json"},  // Needed for HTML report
     monochrome = true
-
 )
-public class TestRunner {
-
-}
