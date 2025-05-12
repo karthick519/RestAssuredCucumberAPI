@@ -1,39 +1,52 @@
-name: Java CI
+name: RestAssured API Testing CI
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-2019
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Set up Java 8
-        uses: actions/setup-java@v2
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
         with:
+          distribution: 'temurin'
           java-version: '8'
-          architecture: 'x64'
 
-      - name: Install dependencies and run tests with Maven
+      - name: Set up Node.js 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Build and Run Tests
         run: mvn clean test
 
-      - name: Set up Node 18.x
-        uses: actions/setup-node@v3
+      - name: Archive Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          node-version: '18.x'
+          name: surefire-reports
+          path: target/surefire-reports/
 
-      - name: Publish Cucumber Report
-        run: |
-          mkdir -p ${{ github.workspace }}/cucumber-report
-          cp -r ${{ github.workspace }}/target/cucumber/*.json ${{ github.workspace }}/cucumber-report/
-        
-      - name: Upload Cucumber Report as artifact
-        uses: actions/upload-artifact@v3
+      - name: Archive Cucumber HTML Report
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: cucumber-report
-          path: ${{ github.workspace }}/cucumber-report/
+          name: cucumber-html-report
+          path: target/cucumber-reports/  # Adjust this path if needed
