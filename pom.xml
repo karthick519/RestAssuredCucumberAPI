@@ -16,10 +16,10 @@
     </properties>
 
     <repositories>
-     <repository>
-        <id>central</id>
-        <url>https://repo.maven.apache.org/maven2</url>
-     </repository>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -29,28 +29,31 @@
             <version>5.4.0</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>7.20.1</version>
         </dependency>
+
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>7.20.1</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
         </dependency>
-        <dependency>
-             <groupId>net.masterthought</groupId>
-             <artifactId>cucumber-reporting</artifactId>
-             <version>5.8.4</version>
-         </dependency>
 
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>5.8.4</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -64,25 +67,6 @@
                         <include>**/TestRunner.java</include>
                     </includes>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <executions>
-                    <execution>
-                        <id>generate-cucumber-html-report</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <projectName>RestAssured Tests</projectName>
-                            <outputDirectory>${project.build.directory}/cucumber-reports</outputDirectory>
-                            <jsonFiles>
-                                <param>${project.build.directory}/cucumber.json</param>
-                            </jsonFiles>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
