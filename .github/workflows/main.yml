@@ -33,7 +33,7 @@ jobs:
           cp -r ${{ github.workspace }}/target/cucumber/*.json ${{ github.workspace }}/cucumber-report/
         
       - name: Upload Cucumber Report as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: cucumber-report
           path: ${{ github.workspace }}/cucumber-report/
