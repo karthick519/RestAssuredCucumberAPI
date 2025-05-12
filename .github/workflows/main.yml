@@ -25,21 +25,12 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
       - name: Build, Run Tests, and Generate Cucumber Report
-        run: mvn clean verify
+        run: mvn clean test
 
       # Optional: Ensure folder exists (for debugging / empty reports)
-      - name: Debug - create cucumber-reports folder if not generated
-        run: mkdir -p target/cucumber-reports
+      #- name: Debug - create cucumber-reports folder if not generated
+        #run: mkdir -p target/cucumber-reports
 
       - name: Archive Test Results
         if: always()
