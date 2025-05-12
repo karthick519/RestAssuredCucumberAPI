@@ -56,6 +56,12 @@
                     <includes>
                         <include>**/TestRunner.java</include>
                     </includes>
+                    <properties>
+                        <property>
+                            <name>cucumber.options</name>
+                            <value>--plugin json:${project.build.directory}/cucumber.json</value>
+                        </property>
+                    </properties>
                 </configuration>
             </plugin>
 
