@@ -67,26 +67,27 @@
 
             <!-- Generates Cucumber HTML report -->
             <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>5.7.0</version>
-                <executions>
-                    <execution>
-                        <id>generate-cucumber-report</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <projectName>RestAssured Cucumber Report</projectName>
-                            <outputDirectory>${project.build.directory}/cucumber-reports</outputDirectory>
-                            <jsonFiles>
-                                <param>${project.build.directory}/cucumber.json</param>
-                            </jsonFiles>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+    <groupId>net.masterthought</groupId>
+    <artifactId>maven-cucumber-reporting</artifactId>
+    <version>5.7.0</version>
+    <executions>
+        <execution>
+            <id>generate-cucumber-reports</id>
+            <phase>verify</phase>
+            <goals>
+                <goal>generate</goal>
+            </goals>
+            <configuration>
+                <projectName>Cucumber Tests</projectName>
+                <jsonFiles>
+                    <param>target/cucumber.json</param>
+                </jsonFiles>
+                <outputDirectory>target/cucumber-reports</outputDirectory>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+
         </plugins>
     </build>
 </project>
