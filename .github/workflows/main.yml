@@ -28,18 +28,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Set up Node.js 18.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Build, Run Tests, and Generate Cucumber Report
+      - name: Build, Run Tests
         run: mvn clean install -DskipTests=true && mvn test
-         
 
-      # Optional: Ensure folder exists (for debugging / empty reports)
-      #- name: Debug - create cucumber-reports folder if not generated
-        #run: mkdir -p target/cucumber-reports
+      - name: Generate Cucumber HTML Report
+        run: mvn exec:java -Dexec.mainClass="RestAssured.cucumber.CucumberReportGenerator"
 
       - name: Archive Test Results
         if: always()
@@ -55,6 +48,3 @@ jobs:
           name: cucumber-html-report
           path: target/cucumber-reports/
           if-no-files-found: warn
-          compression-level: 6
-          overwrite: false
-          include-hidden-files: false
