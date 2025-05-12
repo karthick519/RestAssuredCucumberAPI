@@ -26,7 +26,7 @@ jobs:
           node-version: '18'
 
       - name: Build, Run Tests, and Generate Cucumber Report
-        run: mvn clean test
+        run: mvn clean install -U
 
       # Optional: Ensure folder exists (for debugging / empty reports)
       #- name: Debug - create cucumber-reports folder if not generated
