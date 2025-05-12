@@ -34,15 +34,26 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Build and Run Tests
+      - name: Build and Run Cucumber Tests (with debug)
         run: mvn clean verify -X
+
+      - name: Generate Cucumber HTML Report
+        if: always()
+        run: mvn net.masterthought:maven-cucumber-reporting:generate -X
 
       - name: Archive Surefire Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-         name: surefire-reports
-         path: target/surefire-reports/
+          name: surefire-reports
+          path: target/surefire-reports/
+
+      - name: Archive Cucumber JSON Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-json
+          path: target/cucumber.json
 
       - name: Archive Cucumber HTML Report
         if: always()
