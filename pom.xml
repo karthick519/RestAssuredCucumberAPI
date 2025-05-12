@@ -1,53 +1,48 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>RestAssured</groupId>
-    <artifactId>cucumber</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+	<groupId>RestAssured</groupId>
+	<artifactId>cucumber</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
-    <name>cucumber</name>
-    <url>http://maven.apache.org</url>
+	<name>cucumber</name>
+	<url>http://maven.apache.org</url>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>5.4.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>7.20.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>7.14.0</version>
-            <scope>test</scope>
-        </dependency>
-
+	<dependencies>
+	    <dependency>
+		    <groupId>io.rest-assured</groupId>
+		    <artifactId>rest-assured</artifactId>
+		    <version>5.4.0</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>7.20.1</version>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>7.20.1</version>
+			<scope>test</scope>
+		</dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
         </dependency>
-    </dependencies>
 
-    <build>
+	</dependencies>
+	
+	<build>
         <plugins>
-            <!-- Runs Cucumber tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -56,38 +51,8 @@
                     <includes>
                         <include>**/TestRunner.java</include>
                     </includes>
-                    <properties>
-                        <property>
-                            <name>cucumber.options</name>
-                            <value>--plugin json:${project.build.directory}/cucumber.json</value>
-                        </property>
-                    </properties>
                 </configuration>
             </plugin>
-
-            <!-- Generates Cucumber HTML report -->
-            <plugin>
-    <groupId>net.masterthought</groupId>
-    <artifactId>maven-cucumber-reporting</artifactId>
-    <version>5.7.0</version>
-    <executions>
-        <execution>
-            <id>generate-cucumber-reports</id>
-            <phase>verify</phase>
-            <goals>
-                <goal>generate</goal>
-            </goals>
-            <configuration>
-                <projectName>Cucumber Tests</projectName>
-                <jsonFiles>
-                    <param>target/cucumber.json</param>
-                </jsonFiles>
-                <outputDirectory>target/cucumber-reports</outputDirectory>
-            </configuration>
-        </execution>
-    </executions>
-</plugin>
-
         </plugins>
     </build>
 </project>
