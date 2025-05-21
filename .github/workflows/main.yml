@@ -41,7 +41,7 @@ jobs:
         run: |
           mkdir -p target/cucumber-reports
           javac -cp "$(mvn dependency:build-classpath -Dmdep.outputFile=cp.txt -q):target/classes" src/main/java/RestAssured/cucumber/App.java
-          java -cp "$(cat cp.txt):target/classes" RestAssured.cucumber.CucumberReportGenerator
+          java -cp "$(cat cp.txt):target/classes" RestAssured.cucumber.App
 
       - name: Upload Cucumber Report
         uses: actions/upload-artifact@v4
