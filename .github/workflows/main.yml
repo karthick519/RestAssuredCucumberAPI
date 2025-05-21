@@ -40,7 +40,7 @@ jobs:
       - name: Generate Cucumber Report
         run: |
           mkdir -p target/cucumber-reports
-          javac -cp "$(mvn dependency:build-classpath -Dmdep.outputFile=cp.txt -q):target/classes" src/main/java/RestAssured/cucumber/CucumberReportGenerator.java
+          javac -cp "$(mvn dependency:build-classpath -Dmdep.outputFile=cp.txt -q):target/classes" src/main/java/RestAssured/cucumber/App.java
           java -cp "$(cat cp.txt):target/classes" RestAssured.cucumber.CucumberReportGenerator
 
       - name: Upload Cucumber Report
